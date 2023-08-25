@@ -1,5 +1,5 @@
-/// <amd-module name="@scom/scom-buttons/global/utils.ts" />
-declare module "@scom/scom-buttons/global/utils.ts" {
+/// <amd-module name="@scom/scom-buttons/global/index.ts" />
+declare module "@scom/scom-buttons/global/index.ts" {
     export interface IConfig {
         linkButtons: ILinkButton[];
     }
@@ -8,30 +8,22 @@ declare module "@scom/scom-buttons/global/utils.ts" {
         url?: string;
     }
 }
-/// <amd-module name="@scom/scom-buttons/global/index.ts" />
-declare module "@scom/scom-buttons/global/index.ts" {
-    export interface PageBlock {
-        getData: () => any;
-        setData: (data: any) => Promise<void>;
-        getTag: () => any;
-        setTag: (tag: any) => Promise<void>;
-        validate?: () => boolean;
-        defaultEdit?: boolean;
-        tag?: any;
-        readonly onEdit: () => Promise<void>;
-        readonly onConfirm: () => Promise<void>;
-        readonly onDiscard: () => Promise<void>;
-        edit: () => Promise<void>;
-        confirm: () => Promise<void>;
-        discard: () => Promise<void>;
-        config: () => Promise<void>;
-    }
-    export * from "@scom/scom-buttons/global/utils.ts";
-}
 /// <amd-module name="@scom/scom-buttons/index.css.ts" />
 declare module "@scom/scom-buttons/index.css.ts" {
     export const containerStyle: string;
     export const actionButtonStyle: string;
+}
+/// <amd-module name="@scom/scom-buttons/data.json.ts" />
+declare module "@scom/scom-buttons/data.json.ts" {
+    const _default: {
+        defaultBuilderData: {
+            linkButtons: {
+                caption: string;
+                url: string;
+            }[];
+        };
+    };
+    export default _default;
 }
 /// <amd-module name="@scom/scom-buttons" />
 declare module "@scom/scom-buttons" {
@@ -52,10 +44,6 @@ declare module "@scom/scom-buttons" {
         private pnlButtons;
         private _data;
         tag: any;
-        defaultEdit: boolean;
-        readonly onConfirm: () => Promise<void>;
-        readonly onDiscard: () => Promise<void>;
-        readonly onEdit: () => Promise<void>;
         static create(options?: ScomButtonsElement, parent?: Container): Promise<ScomButtons>;
         constructor(parent?: Container, options?: ScomButtonsElement);
         private getData;

@@ -13,11 +13,11 @@ export default class Module1 extends Module {
     }
 
     render() {
-        return <i-panel>
+        return <i-panel margin={{left: '1rem', top: '1rem'}}>
             <i-scom-buttons
                 data={{
                     linkButtons: [
-                        {caption: 'New text', url: 'google.com'},
+                        {caption: 'New text 1', url: 'google.com'},
                         {caption: 'New text 2', url: 'google.com'}
                     ]
                 }}

@@ -11,6 +11,7 @@ import {
 } from '@ijstech/components';
 import { IConfig } from './global/index';
 import { actionButtonStyle } from './index.css';
+import dataJson from './data.json'
 const Theme = Styles.Theme.ThemeVars;
 
 const propertiesUISchema: IUISchema = {
@@ -192,11 +193,6 @@ declare global {
   }
 }
 
-const defaultColors = {
-  titleFontColor: '#565656',
-  descriptionFontColor: '#565656'
-}
-
 @customModule
 @customElements('i-scom-buttons')
 export default class ScomButtons extends Module {
@@ -204,10 +200,6 @@ export default class ScomButtons extends Module {
 
   private _data: IConfig = {linkButtons: []};
   tag: any = {};
-  defaultEdit: boolean = true;
-  readonly onConfirm: () => Promise<void>;
-  readonly onDiscard: () => Promise<void>;
-  readonly onEdit: () => Promise<void>;
 
   static async create(options?: ScomButtonsElement, parent?: Container) {
     let self = new this(parent, options);
@@ -427,9 +419,8 @@ export default class ScomButtons extends Module {
         },
         getData: this.getData.bind(this),
         setData: async (data: IConfig) => {
-          // const defaultData = dataJson.defaultBuilderData as any;
-          // await this.setData({...defaultData, ...data})
-          await this.setData(data)
+          const defaultData = dataJson.defaultBuilderData as any;
+          await this.setData({...defaultData, ...data})
         },
         getTag: this.getTag.bind(this),
         setTag: this.setTag.bind(this)
@@ -523,15 +514,11 @@ export default class ScomButtons extends Module {
       const data = this.getAttribute('data', true);
       data && this.setData(data);
     }
-    this.setTag({
-      light: {...defaultColors},
-      dark: {...defaultColors}
-    })
   }
 
   render() {
     return (
-      <i-panel id="pnlButtons" minHeight={48} />
+      <i-panel id="pnlButtons" minHeight={25} />
     )
   }
 }
