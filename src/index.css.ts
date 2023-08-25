@@ -1,4 +1,5 @@
 import { Styles } from "@ijstech/components";
+const Theme = Styles.Theme.ThemeVars;
 
 export const containerStyle = Styles.style({
   width: 'var(--layout-container-width)',
@@ -16,7 +17,7 @@ export const actionButtonStyle = Styles.style({
       filter: 'brightness(0.85)'
     },
     '> i-icon:hover': {
-      fill: '#fff !important'
+      fill: `${Theme.colors.primary.contrastText} !important`
     }
   }
 })

@@ -1,17 +1,3 @@
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -29,19 +15,15 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-define("@scom/scom-buttons/global/utils.ts", ["require", "exports"], function (require, exports) {
+define("@scom/scom-buttons/global/index.ts", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-});
-define("@scom/scom-buttons/global/index.ts", ["require", "exports", "@scom/scom-buttons/global/utils.ts"], function (require, exports, utils_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    __exportStar(utils_1, exports);
 });
 define("@scom/scom-buttons/index.css.ts", ["require", "exports", "@ijstech/components"], function (require, exports, components_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.actionButtonStyle = exports.containerStyle = void 0;
+    const Theme = components_1.Styles.Theme.ThemeVars;
     exports.containerStyle = components_1.Styles.style({
         width: 'var(--layout-container-width)',
         maxWidth: 'var(--layout-container-max_width)',
@@ -57,12 +39,24 @@ define("@scom/scom-buttons/index.css.ts", ["require", "exports", "@ijstech/compo
                 filter: 'brightness(0.85)'
             },
             '> i-icon:hover': {
-                fill: '#fff !important'
+                fill: `${Theme.colors.primary.contrastText} !important`
             }
         }
     });
 });
-define("@scom/scom-buttons", ["require", "exports", "@ijstech/components", "@scom/scom-buttons/index.css.ts"], function (require, exports, components_2, index_css_1) {
+define("@scom/scom-buttons/data.json.ts", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    ///<amd-module name='@scom/scom-buttons/data.json.ts'/> 
+    exports.default = {
+        "defaultBuilderData": {
+            linkButtons: [
+                { caption: 'Button Caption', url: '' }
+            ]
+        }
+    };
+});
+define("@scom/scom-buttons", ["require", "exports", "@ijstech/components", "@scom/scom-buttons/index.css.ts", "@scom/scom-buttons/data.json.ts"], function (require, exports, components_2, index_css_1, data_json_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     const Theme = components_2.Styles.Theme.ThemeVars;
@@ -231,10 +225,6 @@ define("@scom/scom-buttons", ["require", "exports", "@ijstech/components", "@sco
             }
         ]
     };
-    const defaultColors = {
-        titleFontColor: '#565656',
-        descriptionFontColor: '#565656'
-    };
     let ScomButtons = class ScomButtons extends components_2.Module {
         static async create(options, parent) {
             let self = new this(parent, options);
@@ -245,7 +235,6 @@ define("@scom/scom-buttons", ["require", "exports", "@ijstech/components", "@sco
             super(parent, options);
             this._data = { linkButtons: [] };
             this.tag = {};
-            this.defaultEdit = true;
         }
         getData() {
             return this._data;
@@ -453,9 +442,8 @@ define("@scom/scom-buttons", ["require", "exports", "@ijstech/components", "@sco
                     },
                     getData: this.getData.bind(this),
                     setData: async (data) => {
-                        // const defaultData = dataJson.defaultBuilderData as any;
-                        // await this.setData({...defaultData, ...data})
-                        await this.setData(data);
+                        const defaultData = data_json_1.default.defaultBuilderData;
+                        await this.setData(Object.assign(Object.assign({}, defaultData), data));
                     },
                     getTag: this.getTag.bind(this),
                     setTag: this.setTag.bind(this)
@@ -519,13 +507,9 @@ define("@scom/scom-buttons", ["require", "exports", "@ijstech/components", "@sco
                 const data = this.getAttribute('data', true);
                 data && this.setData(data);
             }
-            this.setTag({
-                light: Object.assign({}, defaultColors),
-                dark: Object.assign({}, defaultColors)
-            });
         }
         render() {
-            return (this.$render("i-panel", { id: "pnlButtons", minHeight: 48 }));
+            return (this.$render("i-panel", { id: "pnlButtons", minHeight: 25 }));
         }
     };
     ScomButtons = __decorate([
