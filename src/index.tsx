@@ -493,7 +493,7 @@ export default class ScomButtons extends Module {
           <i-button
             caption={link.caption || ""}
             padding={{ left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }}
-            onClick={() => link.url ? window.location.href = link.url : {}}
+            onClick={() => link.url ? window.open(link.url) : {}} // window.location.href = link.url
             font={{ color: captionColor }}
             background={{ color: buttonType === 'filled' ? color : 'transparent' }}
             class={actionButtonStyle}
