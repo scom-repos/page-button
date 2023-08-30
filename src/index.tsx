@@ -493,7 +493,7 @@ export default class ScomButtons extends Module {
           <i-button
             caption={link.caption || ""}
             padding={{ left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }}
-            onClick={() => link.url ? window.open(link.url) : {}} // window.location.href = link.url
+            onClick={() => link.url ? this.onClickBtn(link.url) : {}}
             font={{ color: captionColor }}
             background={{ color: buttonType === 'filled' ? color : 'transparent' }}
             class={actionButtonStyle}
@@ -505,6 +505,22 @@ export default class ScomButtons extends Module {
     }
     this.pnlButtons.style.textAlign = textAlign || 'left';
     this.pnlButtons.height = height
+  }
+
+  private onClickBtn(href: string) {
+    const currentDomain = window.location.hostname;
+
+    // Check link type
+    if (href.startsWith('/') || href.startsWith(currentDomain) || href.startsWith(`http://${currentDomain}`) || href.startsWith(`https://${currentDomain}`)) {
+      // Internal link
+      window.location.href = href;
+    } else if (href.startsWith('http://') || href.startsWith('https://')) {
+      // External link
+      window.open(href);
+    } else {
+      // Other cases, such as anchor links or protocols like "mailto:"
+      window.location.href = href;
+    }
   }
 
   init() {

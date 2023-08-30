@@ -493,12 +493,28 @@ define("@scom/scom-buttons", ["require", "exports", "@ijstech/components", "@sco
                     if (buttonType === 'outlined') {
                         buttonOptions.border = { width: 1, style: 'solid', color: color };
                     }
-                    buttonPanel.append(this.$render("i-button", Object.assign({ caption: link.caption || "", padding: { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }, onClick: () => link.url ? window.open(link.url) : {}, font: { color: captionColor }, background: { color: buttonType === 'filled' ? color : 'transparent' }, class: index_css_1.actionButtonStyle }, buttonOptions)));
+                    buttonPanel.append(this.$render("i-button", Object.assign({ caption: link.caption || "", padding: { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }, onClick: () => link.url ? this.onClickBtn(link.url) : {}, font: { color: captionColor }, background: { color: buttonType === 'filled' ? color : 'transparent' }, class: index_css_1.actionButtonStyle }, buttonOptions)));
                 });
                 this.pnlButtons.append(buttonPanel);
             }
             this.pnlButtons.style.textAlign = textAlign || 'left';
             this.pnlButtons.height = height;
+        }
+        onClickBtn(href) {
+            const currentDomain = window.location.hostname;
+            // Check link type
+            if (href.startsWith('/') || href.startsWith(currentDomain) || href.startsWith(`http://${currentDomain}`) || href.startsWith(`https://${currentDomain}`)) {
+                // Internal link
+                window.location.href = href;
+            }
+            else if (href.startsWith('http://') || href.startsWith('https://')) {
+                // External link
+                window.open(href);
+            }
+            else {
+                // Other cases, such as anchor links or protocols like "mailto:"
+                window.location.href = href;
+            }
         }
         init() {
             super.init();

@@ -98,6 +98,7 @@ declare module "@scom/scom-buttons" {
             setTag: any;
         })[];
         private onUpdateBlock;
+        private onClickBtn;
         init(): void;
         render(): any;
     }
