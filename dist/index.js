@@ -504,7 +504,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
     };
     ScomPageButton = __decorate([
         components_2.customModule,
-        (0, components_2.customElements)('i-scom-page-button')
+        (0, components_2.customElements)('i-page-button')
     ], ScomPageButton);
     exports.default = ScomPageButton;
 });

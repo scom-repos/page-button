@@ -111,7 +111,7 @@ declare module "@scom/page-button" {
     global {
         namespace JSX {
             interface IntrinsicElements {
-                ["i-scom-page-button"]: ScomPageButtonElement;
+                ["i-page-button"]: ScomPageButtonElement;
             }
         }
     }
