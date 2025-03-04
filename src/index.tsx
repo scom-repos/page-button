@@ -21,13 +21,13 @@ interface ScomPageButtonElement extends ControlElement {
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      ["i-scom-page-button"]: ScomPageButtonElement;
+      ["i-page-button"]: ScomPageButtonElement;
     }
   }
 }
 
 @customModule
-@customElements('i-scom-page-button')
+@customElements('i-page-button')
 export default class ScomPageButton extends Module {
   private pnlButtons: Panel;
 
