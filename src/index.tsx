@@ -96,6 +96,7 @@ export default class ScomPageButton extends Module {
     }
     this.pnlButtons.style.textAlign = textAlign || 'left';
     this.pnlButtons.height = height
+    console.log('===', height)
   }
 
   private onClickBtn(href: string) {
@@ -122,6 +123,7 @@ export default class ScomPageButton extends Module {
     const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
     this.updateStyle('--colors-primary-main', this.model.tag[themeVar]?.backgroundColor);
     this.updateStyle('--colors-primary-contrast_text', this.model.tag[themeVar]?.color);
+    this.updateStyle('--typography-font_size', this.model.tag?.fontSize);
   }
 
   init() {
