@@ -14,6 +14,7 @@ declare module "@scom/page-button/interface.ts" {
         buttonType?: 'filled' | 'outlined' | 'text';
         textAlign?: 'left' | 'center' | 'right';
         height?: number | string;
+        fontSize?: string;
     }
     export interface ILinkButtonStyle {
         color?: string;

@@ -13,6 +13,7 @@ export interface ISettings {
   buttonType?: 'filled' | 'outlined' | 'text';
   textAlign?: 'left' | 'center' | 'right';
   height?: number|string;
+  fontSize?: string;
 }
 
 export interface ILinkButtonStyle {
