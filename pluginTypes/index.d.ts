@@ -53,7 +53,7 @@ declare module "@scom/page-button/model/index.ts" {
         private getData;
         setData(data: IConfig): void;
         private getTag;
-        private setTag;
+        setTag(value: ISettings): void;
         private updateTag;
         private _getActions;
         getConfigurators(): ({
@@ -107,7 +107,7 @@ declare module "@scom/page-button" {
     import { IConfig } from "@scom/page-button/interface.ts";
     interface ScomPageButtonElement extends ControlElement {
         lazyLoad?: boolean;
-        data: IConfig;
+        data?: IConfig;
     }
     global {
         namespace JSX {

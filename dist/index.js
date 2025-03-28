@@ -461,9 +461,10 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             }
             this.pnlButtons.style.textAlign = textAlign || 'left';
             this.pnlButtons.height = height;
-            console.log('===', height);
         }
         onClickBtn(href) {
+            if (this._designMode)
+                return;
             const currentDomain = window.location.hostname;
             // Check link type
             if (href.startsWith('/') || href.startsWith(currentDomain) || href.startsWith(`http://${currentDomain}`) || href.startsWith(`https://${currentDomain}`)) {
@@ -499,6 +500,8 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                 const data = this.getAttribute('data', true);
                 data && this.setData(data);
             }
+            const tag = this.getAttribute('tag', true);
+            tag && this.model.setTag(tag);
         }
         render() {
             return (this.$render("i-panel", { id: "pnlButtons", minHeight: 25 }));
@@ -506,7 +509,41 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
     };
     ScomPageButton = __decorate([
         components_2.customModule,
-        (0, components_2.customElements)('i-page-button')
+        (0, components_2.customElements)('i-page-button', {
+            icon: 'stop',
+            props: {
+                data: {
+                    type: 'object',
+                    default: {}
+                }
+            },
+            className: 'ScomPageButton',
+            events: {},
+            dataSchema: {
+                type: 'object',
+                properties: {
+                    data: {
+                        type: 'object',
+                        properties: {
+                            linkButtons: {
+                                type: 'array',
+                                items: {
+                                    type: 'object',
+                                    properties: {
+                                        caption: {
+                                            type: 'string'
+                                        },
+                                        url: {
+                                            type: 'string'
+                                        }
+                                    }
+                                },
+                            }
+                        }
+                    }
+                }
+            }
+        })
     ], ScomPageButton);
     exports.default = ScomPageButton;
 });
