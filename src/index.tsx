@@ -15,7 +15,7 @@ const Theme = Styles.Theme.ThemeVars;
 
 interface ScomPageButtonElement extends ControlElement {
   lazyLoad?: boolean;
-  data: IConfig;
+  data?: IConfig;
 }
 
 declare global {
@@ -27,7 +27,41 @@ declare global {
 }
 
 @customModule
-@customElements('i-page-button')
+@customElements('i-page-button', {
+  icon: 'stop',
+  props: {
+    data: {
+      type: 'object',
+      default: {}
+    }
+  },
+  className: 'ScomPageButton',
+  events: {},
+  dataSchema: {
+    type: 'object',
+    properties: {
+      data: {
+        type: 'object',
+        properties: {
+          linkButtons: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                caption: {
+                  type: 'string'
+                },
+                url: {
+                  type: 'string'
+                }
+              }
+            },
+          }
+        }
+      }
+    }
+  }
+})
 export default class ScomPageButton extends Module {
   private pnlButtons: Panel;
 
@@ -96,10 +130,10 @@ export default class ScomPageButton extends Module {
     }
     this.pnlButtons.style.textAlign = textAlign || 'left';
     this.pnlButtons.height = height
-    console.log('===', height)
   }
 
   private onClickBtn(href: string) {
+    if (this._designMode) return
     const currentDomain = window.location.hostname;
 
     // Check link type
@@ -137,6 +171,9 @@ export default class ScomPageButton extends Module {
       const data = this.getAttribute('data', true);
       data && this.setData(data);
     }
+
+    const tag = this.getAttribute('tag', true);
+    tag && this.model.setTag(tag);
   }
 
   render() {
