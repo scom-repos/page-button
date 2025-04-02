@@ -40,24 +40,19 @@ declare global {
   dataSchema: {
     type: 'object',
     properties: {
-      data: {
-        type: 'object',
-        properties: {
-          linkButtons: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                caption: {
-                  type: 'string'
-                },
-                url: {
-                  type: 'string'
-                }
-              }
+      linkButtons: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            caption: {
+              type: 'string'
             },
+            url: {
+              type: 'string'
+            }
           }
-        }
+        },
       }
     }
   }
@@ -75,6 +70,14 @@ export default class ScomPageButton extends Module {
 
   constructor(parent?: Container, options?: ScomPageButtonElement) {
     super(parent, options);
+  }
+
+  get data() {
+    return this.model.data;
+  }
+
+  set data(value: IConfig) {
+    this.model.data = value;
   }
 
   private async setData(data: IConfig) {
@@ -154,10 +157,10 @@ export default class ScomPageButton extends Module {
   }
 
   private onUpdateTheme() {
-    const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
-    this.updateStyle('--colors-primary-main', this.model.tag[themeVar]?.backgroundColor);
-    this.updateStyle('--colors-primary-contrast_text', this.model.tag[themeVar]?.color);
-    this.updateStyle('--typography-font_size', this.model.tag?.fontSize);
+    // const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
+    this.updateStyle('--colors-primary-main', this.model.tag?.background?.color);
+    this.updateStyle('--colors-primary-contrast_text', this.model.tag?.font?.color);
+    this.updateStyle('--typography-font_size', this.model.tag?.font?.size);
   }
 
   init() {
