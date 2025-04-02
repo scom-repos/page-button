@@ -436,6 +436,12 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
         constructor(parent, options) {
             super(parent, options);
         }
+        get data() {
+            return this.model.data;
+        }
+        set data(value) {
+            this.model.data = value;
+        }
         async setData(data) {
             this.model.setData(data);
         }
@@ -484,10 +490,10 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             value ? this.style.setProperty(name, value) : this.style.removeProperty(name);
         }
         onUpdateTheme() {
-            const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
-            this.updateStyle('--colors-primary-main', this.model.tag[themeVar]?.backgroundColor);
-            this.updateStyle('--colors-primary-contrast_text', this.model.tag[themeVar]?.color);
-            this.updateStyle('--typography-font_size', this.model.tag?.fontSize);
+            // const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
+            this.updateStyle('--colors-primary-main', this.model.tag?.background?.color);
+            this.updateStyle('--colors-primary-contrast_text', this.model.tag?.font?.color);
+            this.updateStyle('--typography-font_size', this.model.tag?.font?.size);
         }
         init() {
             super.init();
@@ -522,24 +528,19 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             dataSchema: {
                 type: 'object',
                 properties: {
-                    data: {
-                        type: 'object',
-                        properties: {
-                            linkButtons: {
-                                type: 'array',
-                                items: {
-                                    type: 'object',
-                                    properties: {
-                                        caption: {
-                                            type: 'string'
-                                        },
-                                        url: {
-                                            type: 'string'
-                                        }
-                                    }
+                    linkButtons: {
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                caption: {
+                                    type: 'string'
                                 },
+                                url: {
+                                    type: 'string'
+                                }
                             }
-                        }
+                        },
                     }
                 }
             }

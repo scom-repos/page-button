@@ -1,6 +1,7 @@
 /// <reference path="@ijstech/components/index.d.ts" />
 /// <amd-module name="@scom/page-button/interface.ts" />
 declare module "@scom/page-button/interface.ts" {
+    import { IFont } from "@ijstech/components";
     export interface IConfig {
         linkButtons: ILinkButton[];
     }
@@ -14,11 +15,12 @@ declare module "@scom/page-button/interface.ts" {
         buttonType?: 'filled' | 'outlined' | 'text';
         textAlign?: 'left' | 'center' | 'right';
         height?: number | string;
-        fontSize?: string;
+        font?: IFont;
+        background?: {
+            color?: string;
+        };
     }
     export interface ILinkButtonStyle {
-        color?: string;
-        backgroundColor?: string;
     }
 }
 /// <amd-module name="@scom/page-button/index.css.ts" />
@@ -121,6 +123,8 @@ declare module "@scom/page-button" {
         private model;
         static create(options?: ScomPageButtonElement, parent?: Container): Promise<ScomPageButton>;
         constructor(parent?: Container, options?: ScomPageButtonElement);
+        get data(): IConfig;
+        set data(value: IConfig);
         private setData;
         getConfigurators(): ({
             name: string;

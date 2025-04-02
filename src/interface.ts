@@ -1,3 +1,5 @@
+import { IFont } from "@ijstech/components";
+
 export interface IConfig {
   linkButtons: ILinkButton[];
 }
@@ -13,10 +15,9 @@ export interface ISettings {
   buttonType?: 'filled' | 'outlined' | 'text';
   textAlign?: 'left' | 'center' | 'right';
   height?: number|string;
-  fontSize?: string;
+  font?: IFont;
+  background?: {color?: string};
 }
 
 export interface ILinkButtonStyle {
-  color?: string;
-  backgroundColor?: string;
 }
