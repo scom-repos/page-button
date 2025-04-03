@@ -15,6 +15,7 @@ declare module "@scom/page-button/interface.ts" {
         buttonType?: 'filled' | 'outlined' | 'text';
         textAlign?: 'left' | 'center' | 'right';
         height?: number | string;
+        width?: number | string;
         font?: IFont;
         background?: {
             color?: string;

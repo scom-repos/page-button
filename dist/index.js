@@ -449,7 +449,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             return this.model.getConfigurators();
         }
         onUpdateBlock() {
-            const { textAlign = 'left', height = 'auto', buttonType = 'filled' } = this.model.tag || {};
+            const { textAlign = 'left', height = 'auto', width = 'auto', buttonType = 'filled' } = this.model.tag || {};
             const { linkButtons = [] } = this.model.data;
             this.pnlButtons.clearInnerHTML();
             const buttons = linkButtons?.filter(link => link.caption || link.url);
@@ -461,7 +461,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                     if (buttonType === 'outlined') {
                         buttonOptions.border = { width: 1, style: 'solid', color: Theme.colors.primary.main };
                     }
-                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }, onClick: () => link.url ? this.onClickBtn(link.url) : {}, font: { color: Theme.colors.primary.contrastText }, background: { color: buttonType === 'filled' ? Theme.colors.primary.main : 'transparent' }, class: index_css_1.actionButtonStyle, ...buttonOptions }));
+                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }, onClick: () => link.url ? this.onClickBtn(link.url) : {}, font: { color: Theme.colors.primary.contrastText }, background: { color: buttonType === 'filled' ? Theme.colors.primary.main : 'transparent' }, height: "100%", width: width, class: index_css_1.actionButtonStyle, ...buttonOptions }));
                 });
                 this.pnlButtons.append(buttonPanel);
             }
@@ -490,7 +490,6 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             value ? this.style.setProperty(name, value) : this.style.removeProperty(name);
         }
         onUpdateTheme() {
-            // const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
             this.updateStyle('--colors-primary-main', this.model.tag?.background?.color);
             this.updateStyle('--colors-primary-contrast_text', this.model.tag?.font?.color);
             this.updateStyle('--typography-font_size', this.model.tag?.font?.size);

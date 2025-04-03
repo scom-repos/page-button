@@ -92,6 +92,7 @@ export default class ScomPageButton extends Module {
     const {
       textAlign = 'left',
       height = 'auto',
+      width = 'auto',
       buttonType = 'filled'
     } = this.model.tag || {};
     const {
@@ -124,6 +125,8 @@ export default class ScomPageButton extends Module {
             onClick={() => link.url ? this.onClickBtn(link.url) : {}}
             font={{ color: Theme.colors.primary.contrastText }}
             background={{ color: buttonType === 'filled' ? Theme.colors.primary.main : 'transparent' }}
+            height="100%"
+            width={width}
             class={actionButtonStyle}
             {...buttonOptions}
           />
@@ -157,7 +160,6 @@ export default class ScomPageButton extends Module {
   }
 
   private onUpdateTheme() {
-    // const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
     this.updateStyle('--colors-primary-main', this.model.tag?.background?.color);
     this.updateStyle('--colors-primary-contrast_text', this.model.tag?.font?.color);
     this.updateStyle('--typography-font_size', this.model.tag?.font?.size);
