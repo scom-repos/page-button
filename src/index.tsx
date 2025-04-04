@@ -92,7 +92,8 @@ export default class ScomPageButton extends Module {
     const {
       textAlign = 'left',
       height = 'auto',
-      buttonType = 'filled'
+      font: fontConfig,
+      padding: paddingConfig
     } = this.model.tag || {};
     const {
       linkButtons = []
@@ -111,19 +112,25 @@ export default class ScomPageButton extends Module {
         ></i-hstack>
       )
       buttons.forEach((link, i) => {
-        const buttonOptions: any = {};
+        const buttonOptions: Record<string, any> = {};
+        const buttonType = link.buttonType || 'filled';
+        const bgColor = link.background?.color || Theme.colors.primary.main;
+        const font = link.font || {color: Theme.colors.primary.contrastText, ...(fontConfig || {})};
+        const padding = link.padding || paddingConfig || {left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem'};
 
         if (buttonType === 'outlined') {
-          buttonOptions.border = { width: 1, style: 'solid', color: Theme.colors.primary.main };
+          buttonOptions.border = { width: 1, style: 'solid', color: bgColor };
         }
 
         buttonPanel.append(
           <i-button
             caption={link.caption || ""}
-            padding={{ left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }}
+            padding={padding}
             onClick={() => link.url ? this.onClickBtn(link.url) : {}}
-            font={{ color: Theme.colors.primary.contrastText }}
-            background={{ color: buttonType === 'filled' ? Theme.colors.primary.main : 'transparent' }}
+            font={font}
+            background={{ color: buttonType === 'filled' ? bgColor : 'transparent' }}
+            height="100%"
+            width={link.width || 'auto'}
             class={actionButtonStyle}
             {...buttonOptions}
           />
@@ -157,9 +164,6 @@ export default class ScomPageButton extends Module {
   }
 
   private onUpdateTheme() {
-    // const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
-    this.updateStyle('--colors-primary-main', this.model.tag?.background?.color);
-    this.updateStyle('--colors-primary-contrast_text', this.model.tag?.font?.color);
     this.updateStyle('--typography-font_size', this.model.tag?.font?.size);
   }
 

@@ -449,7 +449,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             return this.model.getConfigurators();
         }
         onUpdateBlock() {
-            const { textAlign = 'left', height = 'auto', buttonType = 'filled' } = this.model.tag || {};
+            const { textAlign = 'left', height = 'auto', font: fontConfig, padding: paddingConfig } = this.model.tag || {};
             const { linkButtons = [] } = this.model.data;
             this.pnlButtons.clearInnerHTML();
             const buttons = linkButtons?.filter(link => link.caption || link.url);
@@ -458,10 +458,15 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                 let buttonPanel = (this.$render("i-hstack", { verticalAlignment: 'center', horizontalAlignment: horizontalAlignment, gap: "0.5rem", height: "100%" }));
                 buttons.forEach((link, i) => {
                     const buttonOptions = {};
+                    const buttonType = link.buttonType || 'filled';
+                    const bgColor = link.background?.color || Theme.colors.primary.main;
+                    const font = link.font || { color: Theme.colors.primary.contrastText, ...(fontConfig || {}) };
+                    const padding = link.padding || paddingConfig || { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' };
+                    console.log('link button', link, font);
                     if (buttonType === 'outlined') {
-                        buttonOptions.border = { width: 1, style: 'solid', color: Theme.colors.primary.main };
+                        buttonOptions.border = { width: 1, style: 'solid', color: bgColor };
                     }
-                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' }, onClick: () => link.url ? this.onClickBtn(link.url) : {}, font: { color: Theme.colors.primary.contrastText }, background: { color: buttonType === 'filled' ? Theme.colors.primary.main : 'transparent' }, class: index_css_1.actionButtonStyle, ...buttonOptions }));
+                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, onClick: () => link.url ? this.onClickBtn(link.url) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', class: index_css_1.actionButtonStyle, ...buttonOptions }));
                 });
                 this.pnlButtons.append(buttonPanel);
             }
@@ -490,9 +495,6 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             value ? this.style.setProperty(name, value) : this.style.removeProperty(name);
         }
         onUpdateTheme() {
-            // const themeVar = document.body.style.getPropertyValue('--theme') || 'dark';
-            this.updateStyle('--colors-primary-main', this.model.tag?.background?.color);
-            this.updateStyle('--colors-primary-contrast_text', this.model.tag?.font?.color);
             this.updateStyle('--typography-font_size', this.model.tag?.font?.size);
         }
         init() {

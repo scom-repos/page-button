@@ -1,24 +1,28 @@
 /// <reference path="@ijstech/components/index.d.ts" />
 /// <amd-module name="@scom/page-button/interface.ts" />
 declare module "@scom/page-button/interface.ts" {
-    import { IFont } from "@ijstech/components";
+    import { IFont, ISpace } from "@ijstech/components";
     export interface IConfig {
         linkButtons: ILinkButton[];
     }
     export interface ILinkButton {
         caption?: string;
         url?: string;
+        buttonType?: 'filled' | 'outlined' | 'text';
+        width?: number | string;
+        background?: {
+            color?: string;
+        };
+        font?: IFont;
+        padding?: ISpace;
     }
     export interface ISettings {
         light?: ILinkButtonStyle;
         dark?: ILinkButtonStyle;
-        buttonType?: 'filled' | 'outlined' | 'text';
         textAlign?: 'left' | 'center' | 'right';
         height?: number | string;
         font?: IFont;
-        background?: {
-            color?: string;
-        };
+        padding?: ISpace;
     }
     export interface ILinkButtonStyle {
     }
