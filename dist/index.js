@@ -462,7 +462,6 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                     const bgColor = link.background?.color || Theme.colors.primary.main;
                     const font = link.font || { color: Theme.colors.primary.contrastText, ...(fontConfig || {}) };
                     const padding = link.padding || paddingConfig || { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' };
-                    console.log('link button', link, font);
                     if (buttonType === 'outlined') {
                         buttonOptions.border = { width: 1, style: 'solid', color: bgColor };
                     }
