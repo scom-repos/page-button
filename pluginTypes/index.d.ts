@@ -1,7 +1,7 @@
 /// <reference path="@ijstech/components/index.d.ts" />
 /// <amd-module name="@scom/page-button/interface.ts" />
 declare module "@scom/page-button/interface.ts" {
-    import { IFont, ISpace } from "@ijstech/components";
+    import { IBorder, IFont, ISpace } from "@ijstech/components";
     export interface IConfig {
         linkButtons: ILinkButton[];
     }
@@ -15,6 +15,7 @@ declare module "@scom/page-button/interface.ts" {
         };
         font?: IFont;
         padding?: ISpace;
+        border?: IBorder;
     }
     export interface ISettings {
         light?: ILinkButtonStyle;
@@ -23,6 +24,8 @@ declare module "@scom/page-button/interface.ts" {
         height?: number | string;
         font?: IFont;
         padding?: ISpace;
+        margin?: ISpace;
+        border?: IBorder;
     }
     export interface ILinkButtonStyle {
     }

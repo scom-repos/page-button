@@ -93,14 +93,21 @@ export default class ScomPageButton extends Module {
       textAlign = 'left',
       height = 'auto',
       font: fontConfig,
-      padding: paddingConfig
+      padding: paddingConfig,
+      border: borderConfig,
+      margin
     } = this.model.tag || {};
     const {
       linkButtons = []
     } = this.model.data;
 
     this.pnlButtons.clearInnerHTML();
+    if (margin) {
+      this.pnlButtons.margin = margin;
+    }
+
     const buttons = linkButtons?.filter(link => link.caption || link.url);
+
     if (buttons?.length) {
       const horizontalAlignment = textAlign == 'right' ? 'end' : textAlign == 'left' ? 'start' : textAlign;
       let buttonPanel = (
@@ -117,9 +124,12 @@ export default class ScomPageButton extends Module {
         const bgColor = link.background?.color || Theme.colors.primary.main;
         const font = link.font || {color: Theme.colors.primary.contrastText, ...(fontConfig || {})};
         const padding = link.padding || paddingConfig || {left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem'};
+        const border = link.border || borderConfig || {};
 
         if (buttonType === 'outlined') {
-          buttonOptions.border = { width: 1, style: 'solid', color: bgColor };
+          buttonOptions.border = { width: 1, style: 'solid', color: bgColor, ...border };
+        } else if (buttonType === 'filled') {
+          buttonOptions.border = border;
         }
 
         buttonPanel.append(

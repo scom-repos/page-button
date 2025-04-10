@@ -449,9 +449,12 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             return this.model.getConfigurators();
         }
         onUpdateBlock() {
-            const { textAlign = 'left', height = 'auto', font: fontConfig, padding: paddingConfig } = this.model.tag || {};
+            const { textAlign = 'left', height = 'auto', font: fontConfig, padding: paddingConfig, border: borderConfig, margin } = this.model.tag || {};
             const { linkButtons = [] } = this.model.data;
             this.pnlButtons.clearInnerHTML();
+            if (margin) {
+                this.pnlButtons.margin = margin;
+            }
             const buttons = linkButtons?.filter(link => link.caption || link.url);
             if (buttons?.length) {
                 const horizontalAlignment = textAlign == 'right' ? 'end' : textAlign == 'left' ? 'start' : textAlign;
@@ -462,9 +465,12 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                     const bgColor = link.background?.color || Theme.colors.primary.main;
                     const font = link.font || { color: Theme.colors.primary.contrastText, ...(fontConfig || {}) };
                     const padding = link.padding || paddingConfig || { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' };
-                    console.log('link button', link, font);
+                    const border = link.border || borderConfig || {};
                     if (buttonType === 'outlined') {
-                        buttonOptions.border = { width: 1, style: 'solid', color: bgColor };
+                        buttonOptions.border = { width: 1, style: 'solid', color: bgColor, ...border };
+                    }
+                    else if (buttonType === 'filled') {
+                        buttonOptions.border = border;
                     }
                     buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, onClick: () => link.url ? this.onClickBtn(link.url) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', class: index_css_1.actionButtonStyle, ...buttonOptions }));
                 });
