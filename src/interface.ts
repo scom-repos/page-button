@@ -1,4 +1,4 @@
-import { IFont, ISpace } from "@ijstech/components";
+import { IBorder, IFont, ISpace } from "@ijstech/components";
 
 export interface IConfig {
   linkButtons: ILinkButton[];
@@ -12,6 +12,7 @@ export interface ILinkButton {
   background?: {color?: string};
   font?: IFont;
   padding?: ISpace;
+  border?: IBorder;
 }
 
 export interface ISettings {
@@ -21,6 +22,8 @@ export interface ISettings {
   height?: number|string;
   font?: IFont;
   padding?: ISpace;
+  margin?: ISpace;
+  border?: IBorder;
 }
 
 export interface ILinkButtonStyle {
