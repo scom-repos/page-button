@@ -472,7 +472,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                     else if (buttonType === 'filled') {
                         buttonOptions.border = border;
                     }
-                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, onClick: () => link.url ? this.onClickBtn(link.url) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', class: index_css_1.actionButtonStyle, ...buttonOptions }));
+                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, icon: link.icon ? { ...link.icon, stack: { shrink: '0' } } : undefined, rightIcon: link.rightIcon ? { ...link.rightIcon, stack: { shrink: '0' } } : undefined, onClick: (target, event) => link.url ? this.onClickBtn(link.url) : link.onClick ? link.onClick(target, event) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', boxShadow: 'none', tag: link.tag, class: `${index_css_1.actionButtonStyle} ${link.class || ''}`, ...buttonOptions }));
                 });
                 this.pnlButtons.append(buttonPanel);
             }
@@ -516,6 +516,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             }
             const tag = this.getAttribute('tag', true);
             tag && this.model.setTag(tag);
+            this.background = { "color": "transparent" };
         }
         render() {
             return (this.$render("i-panel", { id: "pnlButtons", minHeight: 25 }));

@@ -136,12 +136,16 @@ export default class ScomPageButton extends Module {
           <i-button
             caption={link.caption || ""}
             padding={padding}
-            onClick={() => link.url ? this.onClickBtn(link.url) : {}}
+            icon={link.icon ? {...link.icon, stack: {shrink: '0'}} : undefined}
+            rightIcon={link.rightIcon ? {...link.rightIcon, stack: {shrink: '0'}} : undefined}
+            onClick={(target, event) => link.url ? this.onClickBtn(link.url) : link.onClick ? link.onClick(target, event) : {}}
             font={font}
             background={{ color: buttonType === 'filled' ? bgColor : 'transparent' }}
             height="100%"
             width={link.width || 'auto'}
-            class={actionButtonStyle}
+            boxShadow='none'
+            tag={link.tag}
+            class={`${actionButtonStyle} ${link.class || ''}`}
             {...buttonOptions}
           />
         )
@@ -191,6 +195,7 @@ export default class ScomPageButton extends Module {
 
     const tag = this.getAttribute('tag', true);
     tag && this.model.setTag(tag);
+    this.background = {"color": "transparent"};
   }
 
   render() {
