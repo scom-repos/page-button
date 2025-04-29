@@ -42,6 +42,7 @@ export interface ISettings {
   padding?: ISpace;
   margin?: ISpace;
   border?: IBorder;
+  background?: {color?: string};
 }
 
 export interface ILinkButtonStyle {
