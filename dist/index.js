@@ -449,7 +449,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             return this.model.getConfigurators();
         }
         onUpdateBlock() {
-            const { textAlign = 'left', height = 'auto', font: fontConfig, padding: paddingConfig, border: borderConfig, margin } = this.model.tag || {};
+            const { textAlign = 'left', height = 'auto', font: fontConfig, padding: paddingConfig, border: borderConfig, margin, background } = this.model.tag || {};
             const { linkButtons = [] } = this.model.data;
             this.pnlButtons.clearInnerHTML();
             if (margin) {
@@ -462,7 +462,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                 buttons.forEach((link, i) => {
                     const buttonOptions = {};
                     const buttonType = link.buttonType || 'filled';
-                    const bgColor = link.background?.color || Theme.colors.primary.main;
+                    const bgColor = link.background?.color || background?.color || Theme.colors.primary.main;
                     const font = link.font || { color: Theme.colors.primary.contrastText, ...(fontConfig || {}) };
                     const padding = link.padding || paddingConfig || { left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem' };
                     const border = link.border || borderConfig || {};
@@ -514,8 +514,15 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                 const data = this.getAttribute('data', true);
                 data && this.setData(data);
             }
+            const background = this.getAttribute('background', true);
             const tag = this.getAttribute('tag', true);
-            tag && this.model.setTag(tag);
+            if (tag) {
+                tag.background = background;
+                this.model.setTag(tag);
+            }
+            else {
+                this.model.setTag({ background });
+            }
             this.background = { "color": "transparent" };
         }
         render() {

@@ -95,7 +95,8 @@ export default class ScomPageButton extends Module {
       font: fontConfig,
       padding: paddingConfig,
       border: borderConfig,
-      margin
+      margin,
+      background
     } = this.model.tag || {};
     const {
       linkButtons = []
@@ -121,7 +122,7 @@ export default class ScomPageButton extends Module {
       buttons.forEach((link, i) => {
         const buttonOptions: Record<string, any> = {};
         const buttonType = link.buttonType || 'filled';
-        const bgColor = link.background?.color || Theme.colors.primary.main;
+        const bgColor = link.background?.color || background?.color || Theme.colors.primary.main;
         const font = link.font || {color: Theme.colors.primary.contrastText, ...(fontConfig || {})};
         const padding = link.padding || paddingConfig || {left: '1rem', right: '1rem', top: '0.5rem', bottom: '0.5rem'};
         const border = link.border || borderConfig || {};
@@ -193,8 +194,16 @@ export default class ScomPageButton extends Module {
       data && this.setData(data);
     }
 
+    const background = this.getAttribute('background', true);
+
     const tag = this.getAttribute('tag', true);
-    tag && this.model.setTag(tag);
+    if (tag) {
+      tag.background = background;
+      this.model.setTag(tag);
+    } else {
+      this.model.setTag({background});
+    }
+
     this.background = {"color": "transparent"};
   }
 

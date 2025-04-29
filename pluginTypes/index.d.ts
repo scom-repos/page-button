@@ -43,6 +43,9 @@ declare module "@scom/page-button/interface.ts" {
         padding?: ISpace;
         margin?: ISpace;
         border?: IBorder;
+        background?: {
+            color?: string;
+        };
     }
     export interface ILinkButtonStyle {
     }
