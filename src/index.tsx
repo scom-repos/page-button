@@ -104,7 +104,7 @@ export default class ScomPageButton extends Module {
 
     this.pnlButtons.clearInnerHTML();
     if (margin) {
-      this.pnlButtons.margin = margin;
+      this.margin = margin;
     }
 
     const buttons = linkButtons?.filter(link => link.caption || link.url);
@@ -144,6 +144,7 @@ export default class ScomPageButton extends Module {
             background={{ color: buttonType === 'filled' ? bgColor : 'transparent' }}
             height="100%"
             width={link.width || 'auto'}
+            maxWidth={link.maxWidth || 'auto'}
             boxShadow='none'
             tag={link.tag}
             class={`${actionButtonStyle} ${link.class || ''}`}

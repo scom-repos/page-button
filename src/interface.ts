@@ -26,6 +26,7 @@ export interface ILinkButton {
   tag?: any;
   buttonType?: 'filled' | 'outlined' | 'text';
   width?: number|string;
+  maxWidth?: number|string;
   background?: {color?: string};
   font?: IFont;
   padding?: ISpace;
