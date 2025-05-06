@@ -453,7 +453,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             const { linkButtons = [] } = this.model.data;
             this.pnlButtons.clearInnerHTML();
             if (margin) {
-                this.pnlButtons.margin = margin;
+                this.margin = margin;
             }
             const buttons = linkButtons?.filter(link => link.caption || link.url);
             if (buttons?.length) {
@@ -472,7 +472,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                     else if (buttonType === 'filled') {
                         buttonOptions.border = border;
                     }
-                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, icon: link.icon ? { ...link.icon, stack: { shrink: '0' } } : undefined, rightIcon: link.rightIcon ? { ...link.rightIcon, stack: { shrink: '0' } } : undefined, onClick: (target, event) => link.url ? this.onClickBtn(link.url) : link.onClick ? link.onClick(target, event) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', boxShadow: 'none', tag: link.tag, class: `${index_css_1.actionButtonStyle} ${link.class || ''}`, ...buttonOptions }));
+                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, icon: link.icon ? { ...link.icon, stack: { shrink: '0' } } : undefined, rightIcon: link.rightIcon ? { ...link.rightIcon, stack: { shrink: '0' } } : undefined, onClick: (target, event) => link.url ? this.onClickBtn(link.url) : link.onClick ? link.onClick(target, event) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', maxWidth: link.maxWidth || 'auto', boxShadow: 'none', tag: link.tag, class: `${index_css_1.actionButtonStyle} ${link.class || ''}`, ...buttonOptions }));
                 });
                 this.pnlButtons.append(buttonPanel);
             }

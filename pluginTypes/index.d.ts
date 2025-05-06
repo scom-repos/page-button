@@ -26,6 +26,7 @@ declare module "@scom/page-button/interface.ts" {
         tag?: any;
         buttonType?: 'filled' | 'outlined' | 'text';
         width?: number | string;
+        maxWidth?: number | string;
         background?: {
             color?: string;
         };
