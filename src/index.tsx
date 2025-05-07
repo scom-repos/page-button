@@ -117,6 +117,7 @@ export default class ScomPageButton extends Module {
           horizontalAlignment={horizontalAlignment}
           gap="0.5rem"
           height="100%"
+          wrap='wrap'
         ></i-hstack>
       )
       buttons.forEach((link, i) => {
