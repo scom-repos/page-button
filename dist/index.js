@@ -458,7 +458,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             const buttons = linkButtons?.filter(link => link.caption || link.url);
             if (buttons?.length) {
                 const horizontalAlignment = textAlign == 'right' ? 'end' : textAlign == 'left' ? 'start' : textAlign;
-                let buttonPanel = (this.$render("i-hstack", { verticalAlignment: 'center', horizontalAlignment: horizontalAlignment, gap: "0.5rem", height: "100%" }));
+                let buttonPanel = (this.$render("i-hstack", { verticalAlignment: 'center', horizontalAlignment: horizontalAlignment, gap: "0.5rem", height: "100%", wrap: 'wrap' }));
                 buttons.forEach((link, i) => {
                     const buttonOptions = {};
                     const buttonType = link.buttonType || 'filled';
