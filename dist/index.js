@@ -291,12 +291,15 @@ define("@scom/page-button/model/index.ts", ["require", "exports", "@scom/page-bu
         }
         set data(value) {
             this._data = value;
+            this._options?.onUpdateBlock();
         }
         get tag() {
             return this._tag;
         }
         set tag(value) {
             this._tag = value;
+            this._options?.onUpdateTheme();
+            this._options?.onUpdateBlock();
         }
         getData() {
             return this._data;
