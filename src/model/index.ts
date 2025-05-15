@@ -25,6 +25,7 @@ export class Model {
 
   set data(value: IConfig) {
     this._data = value;
+    this._options?.onUpdateBlock()
   }
 
   get tag() {
@@ -33,6 +34,8 @@ export class Model {
 
   set tag(value: ISettings) {
     this._tag = value;
+    this._options?.onUpdateTheme();
+    this._options?.onUpdateBlock();
   }
 
   private getData() {
