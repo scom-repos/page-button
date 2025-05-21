@@ -107,7 +107,7 @@ export default class ScomPageButton extends Module {
       this.margin = margin;
     }
 
-    const buttons = linkButtons?.filter(link => link.caption || link.url);
+    const buttons = linkButtons?.filter(link => link.caption || link.url || link.icon);
 
     if (buttons?.length) {
       const horizontalAlignment = textAlign == 'right' ? 'end' : textAlign == 'left' ? 'start' : textAlign;
@@ -146,6 +146,8 @@ export default class ScomPageButton extends Module {
             height="100%"
             width={link.width || 'auto'}
             maxWidth={link.maxWidth || 'auto'}
+            tooltip={link.tooltip || undefined}
+            stack={{grow: '0'}}
             boxShadow='none'
             tag={link.tag}
             class={`${actionButtonStyle} ${link.class || ''}`}

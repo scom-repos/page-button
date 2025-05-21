@@ -32,6 +32,7 @@ export interface ILinkButton {
   padding?: ISpace;
   border?: IBorder;
   class?: string;
+  tooltip?: {content: string, placement?: any};
 }
 
 export interface ISettings {
