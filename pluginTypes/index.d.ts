@@ -34,6 +34,10 @@ declare module "@scom/page-button/interface.ts" {
         padding?: ISpace;
         border?: IBorder;
         class?: string;
+        tooltip?: {
+            content: string;
+            placement?: any;
+        };
     }
     export interface ISettings {
         light?: ILinkButtonStyle;

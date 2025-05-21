@@ -458,7 +458,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
             if (margin) {
                 this.margin = margin;
             }
-            const buttons = linkButtons?.filter(link => link.caption || link.url);
+            const buttons = linkButtons?.filter(link => link.caption || link.url || link.icon);
             if (buttons?.length) {
                 const horizontalAlignment = textAlign == 'right' ? 'end' : textAlign == 'left' ? 'start' : textAlign;
                 let buttonPanel = (this.$render("i-hstack", { verticalAlignment: 'center', horizontalAlignment: horizontalAlignment, gap: "0.5rem", height: "100%", wrap: 'wrap' }));
@@ -475,7 +475,7 @@ define("@scom/page-button", ["require", "exports", "@ijstech/components", "@scom
                     else if (buttonType === 'filled') {
                         buttonOptions.border = border;
                     }
-                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, icon: link.icon ? { ...link.icon, stack: { shrink: '0' } } : undefined, rightIcon: link.rightIcon ? { ...link.rightIcon, stack: { shrink: '0' } } : undefined, onClick: (target, event) => link.url ? this.onClickBtn(link.url) : link.onClick ? link.onClick(target, event) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', maxWidth: link.maxWidth || 'auto', boxShadow: 'none', tag: link.tag, class: `${index_css_1.actionButtonStyle} ${link.class || ''}`, ...buttonOptions }));
+                    buttonPanel.append(this.$render("i-button", { caption: link.caption || "", padding: padding, icon: link.icon ? { ...link.icon, stack: { shrink: '0' } } : undefined, rightIcon: link.rightIcon ? { ...link.rightIcon, stack: { shrink: '0' } } : undefined, onClick: (target, event) => link.url ? this.onClickBtn(link.url) : link.onClick ? link.onClick(target, event) : {}, font: font, background: { color: buttonType === 'filled' ? bgColor : 'transparent' }, height: "100%", width: link.width || 'auto', maxWidth: link.maxWidth || 'auto', tooltip: link.tooltip || undefined, stack: { grow: '0' }, boxShadow: 'none', tag: link.tag, class: `${index_css_1.actionButtonStyle} ${link.class || ''}`, ...buttonOptions }));
                 });
                 this.pnlButtons.append(buttonPanel);
             }
