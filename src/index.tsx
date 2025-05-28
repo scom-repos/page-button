@@ -164,17 +164,30 @@ export default class ScomPageButton extends Module {
   private onClickBtn(href: string) {
     if (this._designMode) return
     const currentDomain = window.location.hostname;
+    const parentSite = this.closest('i-decom-site');
 
     // Check link type
     if (href.startsWith('/') || href.startsWith(currentDomain) || href.startsWith(`http://${currentDomain}`) || href.startsWith(`https://${currentDomain}`)) {
       // Internal link
-      window.location.href = href;
+      if (parentSite) {
+        window.history.pushState('', '', `${href}`);
+        window.dispatchEvent(new Event('popstate'));
+      }
+      else {
+        window.location.href = href;
+      }
     } else if (href.startsWith('http://') || href.startsWith('https://')) {
       // External link
       window.open(href);
     } else {
       // Other cases, such as anchor links or protocols like "mailto:"
-      window.location.href = href;
+      if (parentSite) {
+        window.history.pushState('', '', `${href}`);
+        window.dispatchEvent(new Event('popstate'));
+      }
+      else {
+        window.location.href = href;
+      }
     }
   }
 
